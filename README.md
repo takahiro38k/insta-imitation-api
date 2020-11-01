@@ -1,1 +1,1 @@
-# insta-imitation-api
+# SNS Photo Views
