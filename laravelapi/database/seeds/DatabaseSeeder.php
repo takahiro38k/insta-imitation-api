@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(
+            //  配列で複数指定可能。
+            [UsersTableSeeder::class]
+        );
     }
 }
