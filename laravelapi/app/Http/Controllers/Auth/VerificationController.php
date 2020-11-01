@@ -45,7 +45,9 @@ class VerificationController extends Controller
     }
 }
 
-// 以下 default
+// 以下 default code
+
+// <?php
 
 // namespace App\Http\Controllers\Auth;
 
