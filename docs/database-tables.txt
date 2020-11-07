@@ -1,0 +1,33 @@
+users
+  id(PK)
+  name
+  email
+  email_verified_at
+  password
+  remember_token
+  created_at
+  updated_at
+
+posts
+  id(PK)
+  title
+  user_post
+  img
+  liked
+  created_at
+  updated_at
+
+profiles
+  id(PK)
+  nickName
+  userProfile
+  img
+  created_at
+  updated_at
+
+comments
+  id(PK)
+  text
+  userComment
+  created_at
+  updated_at
