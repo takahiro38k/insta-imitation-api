@@ -39,8 +39,8 @@ class PostController extends Controller
         //   2nd param  保存するfile
         //   3rd param  ファイルの公開設定
         $path = Storage::disk('s3')->putFile('posts', $image, 'public');
-        // アップロードした画像のフルパスを取得
-        $post->image_path = Storage::disk('s3')->url($path);
+        // アップロードした画像のフルパスを格納
+        $post->img_post = Storage::disk('s3')->url($path);
         // DBにfileのパスを保存
         $post->save();
     }

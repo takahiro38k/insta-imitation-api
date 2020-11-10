@@ -1,6 +1,5 @@
 users
   id(PK)
-  name
   email
   email_verified_at
   password
@@ -8,26 +7,42 @@ users
   created_at
   updated_at
 
-posts
+profiles
   id(PK)
-  title
-  user_post
-  img
-  liked
+  nickname
+  user_id = users.id
+  img_profile
   created_at
   updated_at
 
-profiles
+posts
   id(PK)
-  nickName
-  userProfile
-  img
+  title
+  user_id(FK) = users.id
+  img_post
+  // liked  "いいね"をしたuserのリスト
   created_at
   updated_at
 
 comments
   id(PK)
   text
-  userComment
+  user_id(FK) = users.id
+  post_id(FK) = posts.id
   created_at
   updated_at
+
+likes
+  id(PK)
+  user_id(FK) = users.id
+  post_id(FK) = posts.id
+  created_at
+  updated_at
+
+済 users 1:1 profiles  1userに1profile。
+済 users 1:N posts  1userに複数の投稿。
+済 users 1:N comments  1userに複数のコメント。
+済 users 1:N likes  1userに複数のいいね。
+済 posts 1:N comments  1投稿に複数のコメント。
+済 posts 1:N likes  1投稿に複数のいいね。
+// users N:M posts  各userは複数の投稿に"いいね"をできる。各投稿は"いいね"をした複数のuserを保持できる。

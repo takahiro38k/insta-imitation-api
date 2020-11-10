@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Like extends Model
 {
     /**
      * relation
-     * User 1:N Comment
+     * User 1:N Like
      */
     public function user()
     {
@@ -17,7 +17,7 @@ class Comment extends Model
 
     /**
      * relation
-     * Post 1:N Comment
+     * Post 1:N Like
      */
     public function post()
     {
