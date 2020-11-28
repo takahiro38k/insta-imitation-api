@@ -65,9 +65,9 @@ class LikeController extends Controller
     {
         // ! Front側で {data: { like } } として格納しているので、likeは連想配列として受け取る。
         // chromeのdev tools(Clockworkタブ)のlogに標示
-        clock($request->like);
-        clock($request->like['loginId']);
-        clock($request->like['post']);
+        // clock($request->like);
+        // clock($request->like['loginId']);
+        // clock($request->like['post']);
 
         $like = Like::where('user_id', $request->like['loginId'])
             ->where('post_id', $request->like['post']);
