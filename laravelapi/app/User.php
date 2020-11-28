@@ -13,8 +13,11 @@ use App\Notifications\VerifyEmail; // 追加
  * Illuminate\Foundation\Auth\User は Model を基底クラスに持つ。
  * よって Authenticatable を継承すれば祖先に Model が存在する。
  */
+// default
 // class User extends Authenticatable
-class User extends Authenticatable implements JWTSubject, MustVerifyEmail
+// 【frontend未実装】アカウントmail認証
+// class User extends Authenticatable implements JWTSubject, MustVerifyEmail
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -24,7 +27,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        // 'name', 'email', 'password', // 'name' 不使用
+        'email', 'password',
     ];
 
     /**

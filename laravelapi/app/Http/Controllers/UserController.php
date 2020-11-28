@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\User;
 use Illuminate\Http\Request;
-use App\User; // 追加
-use Illuminate\Support\Facades\Auth; // 追加
-use Storage; // 追加
 
-class CommentController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        // comment一覧取得
-        $comments = Comment::all();
-        return $comments;
+        //
     }
 
     /**
@@ -30,21 +25,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new Comment;
-        $comment->user_id = Auth::id();
-        $comment->post_id = $request->post;
-        $comment->text = $request->text;
-        $comment->save();
-        return $comment;
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show($id)
     {
         //
     }
@@ -53,10 +43,10 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -64,10 +54,10 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
         //
     }

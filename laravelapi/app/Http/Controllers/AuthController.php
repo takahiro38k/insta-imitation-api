@@ -28,6 +28,9 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
+            // JSONレスポンス
+            // response()->json()
+            // https://readouble.com/laravel/6.x/ja/responses.html#json-responses
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -41,7 +44,12 @@ class AuthController extends Controller
      */
     public function me()
     {
+        // auth()->user()
+        // https://readouble.com/laravel/6.x/ja/helpers.html#method-auth
         return response()->json(auth()->user());
+        // 下記でも同じ(Authファサード利用)
+        // https://readouble.com/laravel/6.x/ja/authentication.html#retrieving-the-authenticated-user
+        // return response()->json(Auth::user());
     }
 
     /**

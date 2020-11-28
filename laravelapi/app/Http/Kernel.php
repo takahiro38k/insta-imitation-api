@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \App\Http\Middleware\AjaxOnly::class, // 追加
+            \App\Http\Middleware\AjaxOnly::class, // 追加
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

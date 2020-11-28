@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use App\User; // 追加
+use Illuminate\Support\Facades\Auth; // 追加
 use Storage; // 追加
 
 class PostController extends Controller
@@ -29,7 +31,9 @@ class PostController extends Controller
     {
         $post = new Post;
         // chromeのdev tools(Clockworkタブ)のlogに標示
-        clock($request);
+        // clock($request->title);
+        // clock($request->img);
+
         // reactで設定したFormDataインスタンス(uploadData)から、
         // "img" keyの値(格納した画像file)を取得。
         $image = $request->img;
@@ -41,8 +45,12 @@ class PostController extends Controller
         $path = Storage::disk('s3')->putFile('posts', $image, 'public');
         // アップロードした画像のフルパスを格納
         $post->img_post = Storage::disk('s3')->url($path);
+
+        $post->user_id = Auth::id();
+        $post->title = $request->title;
         // DBにfileのパスを保存
         $post->save();
+        return $post;
     }
 
     /**

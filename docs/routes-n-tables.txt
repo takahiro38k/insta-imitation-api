@@ -1,0 +1,139 @@
+######## routes
+
+--------------------
+#### auth
+
+新規アカウント作成
+curl -s -X POST http://localhost/api/register \
+  -H "content-type: application/json" \
+  -d '{"email":"●●●","password":"●●●","password_confirmation":"●●●"}' | jq
+
+login - token取得
+curl -s -X POST http://localhost/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"email": "●●●", "password": "●●●"}' | jq
+
+user情報取得
+curl -s -X POST http://localhost/api/auth/me \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+logout - token破棄
+curl -s -X POST http://localhost/api/auth/logout \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+--------------------
+#### profiles
+
+profile作成
+  registerに合わせて実行するためtokenの認証なし。
+  id = user_id となる。
+curl -s -X POST http://localhost/api/profiles \
+  -H 'Content-Type: application/json' \
+  -d '{"id": ●, "nickname": "ユーザー"}' | jq
+
+profile一覧取得
+curl -s -X GET http://localhost/api/profiles \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+profile取得
+curl -s -X GET http://localhost/api/profiles/me \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+profile更新
+curl -s -X PUT http://localhost/api/profiles/me \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+--------------------
+#### posts
+
+投稿一覧取得
+curl -s -X GET http://localhost/api/posts \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+投稿作成
+curl -s -X POST http://localhost/api/posts \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+--------------------
+#### comments
+
+コメント一覧取得
+curl -s -X GET http://localhost/api/comments \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+コメント作成
+curl -s -X POST http://localhost/api/comments \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+--------------------
+#### likes
+
+いいね一覧取得
+curl -s -X GET http://localhost/api/likes \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+いいね作成
+curl -s -X POST http://localhost/api/likes \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+いいね削除
+curl -s -X DELETE http://localhost/api/likes/● \
+  -H 'Authorization: Bearer ●取得token●' \
+  -d '{"like": {"loginId": "●", "post": "●"}}' | jq
+
+--------------------
+#### 未実装
+
+token更新
+curl -s -X POST http://localhost/api/auth/refresh \
+  -H 'Authorization: Bearer ●取得token●' | jq
+
+========================================
+######## tables
+
+users
+  id(PK)
+  email
+  email_verified_at
+  password
+  remember_token
+  created_at
+  updated_at
+
+profiles
+  id(PK)
+  user_id(FK) = users.id
+  nickname
+  img_profile
+  created_at
+  updated_at
+
+posts
+  id(PK)
+  user_id(FK) = users.id
+  title
+  img_post
+  created_at
+  updated_at
+
+comments
+  id(PK)
+  user_id(FK) = users.id
+  post_id(FK) = posts.id
+  text
+  created_at
+  updated_at
+
+likes
+  user_id(PK)(FK) = users.id
+  post_id(PK)(FK) = posts.id
+  created_at
+  updated_at
+
+済 users 1:1 profiles  1userに1profile。
+済 users 1:N posts  1userに複数の投稿。
+済 users 1:N comments  1userに複数のコメント。
+済 users 1:N likes  1userに複数のいいね。
+済 posts 1:N comments  1投稿に複数のコメント。
+済 posts 1:N likes  1投稿に複数のいいね。
+
